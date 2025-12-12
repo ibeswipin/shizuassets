@@ -75,10 +75,7 @@ class AutoFormatter(loader.Module):
             ),
         )
 
-    @loader.watcher(
-        only_messages=True,
-    )
-    async def textformat_watcher(self, app, message: Message):
+    async def watcher(self, app, message: Message):
         if not self.config.get("status", False):
             return
         
@@ -91,6 +88,8 @@ class AutoFormatter(loader.Module):
 
         if message.outgoing:
             return
+
+        print("format")
 
         exc = self.config["exceptions"]
         f = self.config["format"]
